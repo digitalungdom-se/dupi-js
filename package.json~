@@ -1,0 +1,39 @@
+{
+    "name": "dupi",
+    "version": "1.0.0",
+    "description": "JavaScript bindings for Digital Ungdom's openAPI",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+        "lib/**/*"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+        "lint": "tslint -p tsconfig.json",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm test && npm run lint"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/digitalungdom-se/dupi-js.git"
+    },
+    "author": "Kelvin Szolnoky",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/digitalungdom-se/dupi-js/issues"
+    },
+    "homepage": "https://github.com/digitalungdom-se/dupi-js#readme",
+    "devDependencies": {
+        "prettier": "^1.19.1",
+        "tslint": "^5.20.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.7.2"
+    },
+    "dependencies": {
+        "@types/request": "^2.48.3",
+        "@types/request-promise": "^4.1.45",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.5"
+    }
+}

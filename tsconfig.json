@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "esnext",
+        "watch": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "./lib",
+        "baseUrl": "./src",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ]
+        }
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.d.ts"
+    ]
+}

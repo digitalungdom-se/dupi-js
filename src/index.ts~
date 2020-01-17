@@ -1,0 +1,80 @@
+import request from 'request-promise';
+
+//const DIGITALUNGDOMURL = 'https://digitalungdom.se/openapi/';
+const DIGITALUNGDOMURL = 'http://localhost:8080/openapi/';
+
+type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PUT';
+
+class RequestError extends Error {
+    public name: string;
+    public statusCode: number;
+
+    constructor(message: string, statusCode: number) {
+
+        super(message);
+        this.name = "RequestError";
+        this.statusCode = statusCode;
+    }
+}
+
+
+
+class Dupi<User>{
+    private apiKey: string;
+
+    constructor(apiKey: string) {
+        if (!apiKey) {
+            throw new Error("API key required");
+        }
+
+        this.apiKey = apiKey;
+    }
+
+    private async callAPI(path: string, method: RequestMethod, info?: object): Promise<any> {
+        var requestOptions: request.OptionsWithUri = {
+            method: method,
+            uri: DIGITALUNGDOMURL + path,
+            headers: { 'x-api-key': this.apiKey },
+            resolveWithFullResponse: true,
+            json: true,
+            body: info
+        };
+
+        console.log(requestOptions);
+
+        return await request(requestOptions);
+    }
+
+    public async ping(): Promise<boolean> {
+        const res = await this.callAPI('ping', 'GET');
+
+        if (res.ok) {
+            return true
+        } else {
+            throw new RequestError("errorAuthenticating", res.statusCode);
+        }
+    }
+
+    public async getUser(userSecretID: string): Promise<User> {
+        const info = { userSecretID };
+        const res = await this.callAPI('get/user', 'GET', info);
+
+        if (res.body.user) {
+            return res.body.user;
+        } else {
+            return null;;
+        }
+    }
+
+}
+
+(async function() {
+    const dupi = new Dupi('7f3d57daafab38ca095e435f072f40b03bb8fb1e9b10658e41ac6fee430071ab');
+    await dupi.ping();
+
+    const user = await dupi.getUser("testid");
+
+    console.log(user);
+})()
+
+export default Dupi
