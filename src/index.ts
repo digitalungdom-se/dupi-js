@@ -1,7 +1,7 @@
 import request from 'request-promise';
 
-//const DIGITALUNGDOMURL = 'https://digitalungdom.se/openapi/';
-const DIGITALUNGDOMURL = 'http://localhost:8080/openapi/';
+const DIGITALUNGDOMURL = 'https://digitalungdom.se/openapi/';
+// const DIGITALUNGDOMURL = 'http://localhost:8080/openapi/';
 
 type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PUT';
 
@@ -31,8 +31,8 @@ class Dupi<User>{
     }
 
     private async callAPI(path: string, method: RequestMethod, info?: object): Promise<any> {
-        var requestOptions: request.OptionsWithUri = {
-            method: method,
+        const requestOptions: request.OptionsWithUri = {
+            method,
             uri: DIGITALUNGDOMURL + path,
             headers: { 'x-api-key': this.apiKey },
             resolveWithFullResponse: true,
