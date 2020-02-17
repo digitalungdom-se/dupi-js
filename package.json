@@ -1,46 +1,52 @@
 {
-  "name": "@digitalungdom-se/dupi-js",
-  "version": "1.0.0",
-  "description": "JavaScript bindings for Digital Ungdom's openAPI",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib/**/*"
-  ],
-  "scripts": {
-    "build": "tsc --build",
-    "test": "echo \"Error: no test specified\"",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/digitalungdom-se/dupi-js.git"
-  },
-  "author": "Kelvin Szolnoky",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/digitalungdom-se/dupi-js/issues"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "homepage": "https://github.com/digitalungdom-se/dupi-js#readme",
-  "devDependencies": {
-    "prettier": "^1.19.1",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.7.2"
-  },
-  "dependencies": {
-    "@types/request": "^2.48.3",
-    "@types/request-promise": "^4.1.45",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5"
-  },
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  }
+    "name": "@digitalungdom-se/dupi-js",
+    "version": "1.0.0",
+    "description": "JavaScript bindings for Digital Ungdom's openAPI",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+        "lib/**/*"
+    ],
+    "scripts": {
+        "lint": "node_modules/typescript/bin/tsc --noEmit && node_modules/eslint/bin/eslint.js 'src/**/*.ts' --fix && echo '✔️ nice'",
+        "prebuild": "npm run lint -s",
+        "build": "node_modules/typescript/bin/tsc",
+        "test": "echo \"Error: no test specified\"",
+        "prepublishOnly": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/digitalungdom-se/dupi-js.git"
+    },
+    "author": "Kelvin Szolnoky",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/digitalungdom-se/dupi-js/issues"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "homepage": "https://github.com/digitalungdom-se/dupi-js#readme",
+    "devDependencies": {
+        "@types/request": "^2.48.4",
+        "@types/request-promise": "^4.1.45",
+        "@typescript-eslint/eslint-plugin": "^2.20.0",
+        "@typescript-eslint/parser": "^2.20.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-node": "^11.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-security": "^1.4.0",
+        "prettier": "^1.19.1",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.7.5"
+    },
+    "dependencies": {
+        "request": "^2.88.2",
+        "request-promise": "^4.2.5"
+    },
+    "directories": {
+        "lib": "lib",
+        "test": "test"
+    }
 }

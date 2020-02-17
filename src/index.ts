@@ -1,25 +1,22 @@
-import request from 'request-promise';
+import request from "request-promise";
 
-const DIGITALUNGDOMURL = 'https://digitalungdom.se/openapi/';
+const DIGITALUNGDOMURL = "https://digitalungdom.se/openapi/";
 // const DIGITALUNGDOMURL = 'http://localhost:8080/openapi/';
 
-type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PUT';
+type RequestMethod = "GET" | "POST" | "DELETE" | "PUT";
 
 class RequestError extends Error {
     public name: string;
     public statusCode: number;
 
     constructor(message: string, statusCode: number) {
-
         super(message);
         this.name = "RequestError";
         this.statusCode = statusCode;
     }
 }
 
-
-
-class Dupi<User>{
+class Dupi<User> {
     private apiKey: string;
 
     constructor(apiKey: string) {
@@ -34,10 +31,10 @@ class Dupi<User>{
         const requestOptions: request.OptionsWithUri = {
             method,
             uri: DIGITALUNGDOMURL + path,
-            headers: { 'x-api-key': this.apiKey },
+            headers: { "X-API-Key": this.apiKey },
             resolveWithFullResponse: true,
             json: true,
-            body: info
+            body: info,
         };
 
         return await request(requestOptions);
@@ -45,18 +42,17 @@ class Dupi<User>{
 
     public async ping(): Promise<boolean> {
         try {
-            await this.callAPI('ping', 'GET');
+            await this.callAPI("ping", "GET");
             return true;
         } catch (e) {
             throw new RequestError("errorAuthenticating", 401);
-
         }
     }
 
     public async getUser(userSecretID: string): Promise<User | boolean> {
         try {
             const info = { userSecretID };
-            const res = await this.callAPI('get/user', 'GET', info);
+            const res = await this.callAPI("get/user", "GET", info);
             return res.body.user;
         } catch (e) {
             return false;
